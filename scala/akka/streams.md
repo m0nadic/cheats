@@ -119,3 +119,44 @@ richard
 jamie
 ```
 
+---
+## Materialized Values
+
+```scala
+val simpleGraph = Source(1 to 10).to(Sink.foreach(println))
+val simpleMatValue: NotUsed = simpleGraph.run()
+```
+
+### Using materialized values
+```
+import system.dispatcher
+val source = Source(1 to 10)
+
+val sink = Sink.reduce[Int]( (a,b) => a + b)
+
+val matValue: Future[Int] = source.runWith(sink)
+
+matValue.onComplete{
+  case Success(value) => println(s"success with $value")
+  case Failure(ex) => println(s"error: $ex")
+}
+```
+
+### Choosing materialized values
+
+```scala
+val source = Source(1 to 10)
+
+val flow = Flow[Int].map(x => x + 1)
+
+val sink = Sink.reduce[Int]((a,b) => a + b)
+
+val graph = source.viaMat(flow)(Keep.right).toMat(sink)(Keep.right)
+
+graph.run().onComplete{
+  case Success(value) => println(s"stream processing complete value = $value")
+  case Failure(ex) => println(s"failed with exception $ex")
+}
+```
+
+
