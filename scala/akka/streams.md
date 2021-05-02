@@ -128,7 +128,8 @@ val simpleMatValue: NotUsed = simpleGraph.run()
 ```
 
 ### Using materialized values
-```
+
+```scala
 import system.dispatcher
 val source = Source(1 to 10)
 
