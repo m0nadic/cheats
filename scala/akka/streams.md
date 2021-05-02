@@ -49,3 +49,16 @@ object SimpleStreams extends App {
 }
 ```
 
+## Attach a flow to a source 
+
+```scala
+ val aSource: Source[Int, NotUsed] = Source(1 to 10).via(Flow[Int].map(x =>  2*x))
+```
+
+## Attach flow to a sink
+
+```scala
+ val aSink: Sink[Int, NotUsed] = Flow[Int].map(x => 3 * x).to(Sink.reduce[Int](_ + _))
+```
+
+
