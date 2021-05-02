@@ -167,3 +167,21 @@ graph.run().onComplete{
 
 ```
 
+### backwards, starting from sink
+
+```scala
+Sink.reduce[Int](_ + _).runWith(Source(1 to 10))
+```
+
+### both ways, starting from flow
+
+```scala
+val result: (NotUsed, Future[String]) = Flow[String].map(_.toUpperCase()).runWith(
+  Source(List("one", "two")),
+  Sink.head
+)
+result._2.onComplete{
+  case Success(s) => println(s"got ${s}")
+  case Failure(ex) => println(s"ERROR: $ex")
+}
+```
