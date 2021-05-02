@@ -25,21 +25,26 @@ libraryDependencies ++= Seq(
 ## Example streams app
 
 ```scala
+package samples
+
+import akka.actor.ActorSystem
+import akka.stream.scaladsl.{Flow, Sink, Source}
+
 object SimpleStreams extends App {
-  implicit val system = ActorSystem("first-principles")
+  implicit val system = ActorSystem("simple-streams")
   // Source (Producer)
   val source = Source(1 to 100)
 
   // Sink (Consumer)
   val sink = Sink.foreach[Int](println)
-  
+
   // Flow (transform elements)
   val flow = Flow[Int].map( x => x + 1 )
 
   // graph
   val graph = source.via(flow).to(sink)
-  
-  // 
+
+  // run the graph
   graph.run()
 }
 ```
