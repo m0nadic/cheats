@@ -185,3 +185,35 @@ result._2.onComplete{
   case Failure(ex) => println(s"ERROR: $ex")
 }
 ```
+
+### Examples
+
+return last element out of a source
+
+```scala
+val lastValue: Future[Int] = Source(1 to 10).toMat(Sink.last)(Keep.right).run()
+```
+
+compute the total word count out of a stream of sentences
+
+```scala
+val sentenceSource = Source(List(
+  "Logic is the beginning of wisdom not the end",
+  "Highly illogical",
+  "Live long, and prosper",
+  "Things are only impossible until they're not",
+  "Insufficient facts always invite danger"
+))
+
+val f: Future[Int] = sentenceSource
+  .map(s => s.split(" ").length)
+  .runWith(
+    Sink.reduce[Int]((a, b) => a + b )
+  )
+
+f.onComplete{
+  case Success(value) => println(s"total word count $value")
+  case _ =>
+}
+```
+
