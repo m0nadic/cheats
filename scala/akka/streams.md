@@ -159,5 +159,11 @@ graph.run().onComplete{
   case Failure(ex) => println(s"failed with exception $ex")
 }
 ```
+### Syntactic sugars
 
+```scala
+  val sumFuture = Source(1 to 10).runWith(Sink.reduce[Int](_ + _))
+  val multFuture = Source(1 to 10).runWith(Sink.reduce[Int](_ * _))
+
+```
 
