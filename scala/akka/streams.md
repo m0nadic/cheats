@@ -21,3 +21,23 @@ libraryDependencies ++= Seq(
 ```
 
 ---
+
+## Example streams app
+
+```scala
+object SimpleStreams extends App {
+  implicit val system = ActorSystem("first-principles")
+  // Source (Producer)
+  val source = Source(1 to 100)
+
+  // Sink (Consumer)
+  val sink = Sink.foreach[Int](println)
+
+  // graph
+  val graph = source.to(sink)
+  
+  // 
+  graph.run()
+}
+```
+
