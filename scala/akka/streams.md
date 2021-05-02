@@ -217,3 +217,28 @@ f.onComplete{
 }
 ```
 
+alternative implementation
+
+```scala
+val sentenceSource = Source(List(
+  "Logic is the beginning of wisdom not the end",
+  "Highly illogical",
+  "Live long, and prosper",
+  "Things are only impossible until they're not",
+  "Insufficient facts always invite danger"
+))
+
+val counterFlow = Flow[String].map( s => s.split(" ").length )
+
+val reducerSink = Sink.reduce[Int](_ + _)
+
+sentenceSource
+  .viaMat(counterFlow)(Keep.right)
+  .toMat(reducerSink)(Keep.right)
+  .run()
+  .onComplete{
+    case Success(value) => println(s"Total word count is $value")
+    case Failure(ex) => println(s"ERROR: $ex")
+  }
+
+```
