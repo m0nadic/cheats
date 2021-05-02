@@ -32,9 +32,12 @@ object SimpleStreams extends App {
 
   // Sink (Consumer)
   val sink = Sink.foreach[Int](println)
+  
+  // Flow (transform elements)
+  val flow = Flow[Int].map( x => x + 1 )
 
   // graph
-  val graph = source.to(sink)
+  val graph = source.via(flow).to(sink)
   
   // 
   graph.run()
