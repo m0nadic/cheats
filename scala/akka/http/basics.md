@@ -29,7 +29,7 @@ libraryDependencies ++= Seq(
 )
 ```
 
-### Sync Server
+## Sync Server
 
 ```scala
 package sample
@@ -45,15 +45,18 @@ import scala.util.{Failure, Success}
 object SyncServer extends App {
 
   implicit val system = ActorSystem("sync-server")
-  import system.dispatcher
+  import system.dispatcher. // Don't use in production code
   
+  // Source 
   val connSource = Http().newServerAt("localhost", 8080).connectionSource()
   
+  // Sink
   val connSink = Sink.foreach[IncomingConnection]{ conn =>
     println(s"Accepted incoming connection from ${conn.remoteAddress}")
-    conn.handleWithSyncHandler(handler)
+    conn.handleWithSyncHandler(handler) // Sync server
   }
 
+  // Connect source to a sink and run the graph
   val bindingFuture = connSource.to(connSink).run()
 
   bindingFuture.onComplete{
@@ -61,6 +64,7 @@ object SyncServer extends App {
     case Failure(ex) => println(s"bind failure: $ex")
   }
 
+  // partial function
   val handler: HttpRequest => HttpResponse = {
     case HttpRequest(HttpMethods.GET, _, _, _, _) => HttpResponse(
       StatusCodes.OK,
