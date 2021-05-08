@@ -1,5 +1,7 @@
 # JSON with spray-json
 
+## Marshalling and Unmarshalling case classes
+
 ```scala
 package sample
 
