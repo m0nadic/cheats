@@ -9,26 +9,26 @@ GET /_cluster/health
 GET /_cat/shards?v
 ```
 
-# list nodes 
+## list nodes 
 
 ```
 GET /_cat/nodes?format=json
 GET /_cat/nodes?v
 ```
 
-# list indices
+## list indices
 ```
 GET /_cat/indices?v
 ```
 
-# Create and delete index
+## Create and delete index
 
 ```
 PUT /pages
 DELETE /pages
 ```
 
-# Create index with settings
+## Create index with settings
 
 ```
 PUT /products
@@ -40,7 +40,7 @@ PUT /products
 }
 ```
 
-# Create document 
+## Create document 
 
 ```
 POST /products/_doc
@@ -52,7 +52,7 @@ POST /products/_doc
 ```
 
 
-# Create docment by specifying id (Use PUT)
+## Create docment by specifying id (Use PUT)
 
 ```
 PUT /products/_doc/100
@@ -63,14 +63,14 @@ PUT /products/_doc/100
 }
 ```
 
-# Retrieving documents
+## Retrieving documents
 
 ```
 GET /products/_doc/100
 ```
 
 
-# Updating documents
+## Updating documents
 
 ```
 POST /products/_update/100
@@ -81,7 +81,7 @@ POST /products/_update/100
 }
 ```
 
-# Updating documents, add new field
+## Updating documents, add new field
 
 ```
 POST /products/_update/100
@@ -93,6 +93,7 @@ POST /products/_update/100
 ```
 
 ## scripted update
+
 ### decrement
 ```
 POST /products/_update/100
