@@ -92,24 +92,31 @@ POST /products/_update/100
 }
 ```
 
-# scripted update
-# decrement
+## scripted update
+### decrement
+```
 POST /products/_update/100
 {
   "script": {
     "source": "ctx._source.in_stock--"
   }
 }
+```
 
-# assignment
+### assignment
+
+```
 POST /products/_update/100
 {
   "script": {
     "source": "ctx._source.in_stock = 20"
   }
 }
+```
 
-# using parameters (useful while used from application)
+### using parameters (useful while used from application)
+
+```
 POST /products/_update/100
 {
   "script": {
@@ -119,8 +126,11 @@ POST /products/_update/100
     }
   }
 }
+```
 
-# conditions
+### conditions
+
+```
 POST /products/_update/100
 {
   "script": {
@@ -131,8 +141,11 @@ POST /products/_update/100
     """
   }
 }
+```
 
-# conditions -> noop
+### conditions -> noop
+
+```
 POST /products/_update/100
 {
   "script": {
@@ -144,8 +157,11 @@ POST /products/_update/100
     """
   }
 }
+```
 
-# conditions -> delete
+### conditions -> delete
+
+```
 POST /products/_update/100
 {
   "script": {
@@ -157,8 +173,11 @@ POST /products/_update/100
     """
   }
 }
+```
 
-# Upsert
+## Upsert
+
+```
 POST /products/_update/101
 {
   "script": {
@@ -170,34 +189,51 @@ POST /products/_update/101
     "in_stock": 10
   }
 }
+```
 
-# Replacing documents
+## Replacing documents
+
+```
 GET /products/_doc/100
+```
 
+```
 PUT /products/_doc/100
 {
   "name" : "Toaster",
   "price" : 79,
   "in_stock" : 20
 }
+```
 
-# Deleting documents
+## Deleting documents
+
+```
 DELETE /products/_doc/100
+```
 
-# Routing
-# shard_num = hash(_routing) % num_primary_shards
+## Routing
 
-# Optimistic Concurrency Control
+> shard_num = hash(_routing) % num_primary_shards
+
+## Optimistic Concurrency Control
+
+```
 GET /products/_doc/100
+```
 
+```
 POST /products/_update/100?if_primary_term=2&if_seq_no=102
 {
   "doc": {
     "in_stock": 30
   }
 }
+```
 
-# Update by query
+## Update by query
+
+```
 POST /products/_update_by_query
 {
   "script": {
@@ -207,10 +243,13 @@ POST /products/_update_by_query
     "match_all": {}
   }
 }
+```
 
+```
 GET /products/_search
 {
   "query": {
     "match_all": {}
   }
 }
+```
