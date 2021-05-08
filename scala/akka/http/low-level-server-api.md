@@ -88,7 +88,7 @@ object AsyncServer extends App {
   val connSource = Http().newServerAt("localhost", 8080).connectionSource()
 
   val connSink = Sink.foreach[IncomingConnection]{ conn =>
-    conn.handleWithAsyncHandler(handler)
+    conn.handleWithAsyncHandler(handler) // Async Server
   }
 
   connSource.to(connSink).run().onComplete{
@@ -138,7 +138,7 @@ object FlowServer extends App {
 
   val connSource = Http().newServerAt("localhost", 8081).connectionSource()
   val connSink = Sink.foreach[IncomingConnection]{ conn =>
-    conn.handleWith(handlerFlow)
+    conn.handleWith(handlerFlow) // Server with Flow Handler
   }
 
   val bindingFuture = connSource.to(connSink).run()
