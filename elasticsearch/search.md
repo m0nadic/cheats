@@ -261,6 +261,51 @@ GET /recipe/_search
 }
 ```
 
+## Using operator
+
+```
+GET /recipe/_search 
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "pasta spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
+```
+
+## Match phrase
+
+```
+GET /recipe/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": "spaghetti puttanesca"
+    }
+  }
+}
+```
+
+This doesn't return any result (order of terms matter)
+
+```
+GET /recipe/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": "puttanesca spaghetti"
+    }
+  }
+}
+```
+
+## Searching multiple fields
+
+
 
 
 
