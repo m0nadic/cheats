@@ -127,7 +127,7 @@ and execute
 
 within chef-repo
 
-``bash
+```bash
 $ chef generate cookbook cookbooks/lbhaproxy
 ```
 
