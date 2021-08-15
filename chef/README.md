@@ -21,7 +21,8 @@ add the following content
 ```ruby
 package 'httpd'
 
-file '/var/www/html/index.html' do content '<h1>Hello, world!</h1>'
+file '/var/www/html/index.html' do 
+  content '<h1>Hello, world!</h1>'
 end
 
 service 'httpd' do
