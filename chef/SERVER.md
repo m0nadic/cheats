@@ -119,4 +119,27 @@ and execute
 [vagrant@web1 ~]$ sudo chef-client
 ```
 
+## Supermarket
 
+[Supermarket](https://supermarket.chef.io/)
+
+## Creating wrapper cookbook
+
+within chef-repo
+
+``bash
+$ chef generate cookbook cookbooks/lbhaproxy
+```
+
+edit `cookbooks/lbhaproxy/metadata.rb` file
+
+and add the following line 
+
+```ruby
+depends 'haproxy', '~> 12.2.0'
+```
+
+```bash
+$ berks install
+$ berks upload
+```
