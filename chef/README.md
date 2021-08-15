@@ -29,3 +29,11 @@ service 'httpd' do
   action [ :enable, :start ]
 end
 ```
+
+## Apply recipe
+
+```bash
+$ sudo chef-client -z cookbooks/apache/recipes/server.rb
+```
+
+
