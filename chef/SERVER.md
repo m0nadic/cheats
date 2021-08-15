@@ -96,3 +96,27 @@ $ knife bootstrap localhost                                                     
 ```
 
 
+```bash
+$ knife node list
+$ knife node show web1
+```
+
+## Adding run list to node
+
+```bash
+$ knife node run_list add web1 "recipe[apache]"
+```
+
+Now login to `web1`
+
+```bash
+$ vagrant ssh web1
+```
+
+and execute 
+
+```bash
+[vagrant@web1 ~]$ sudo chef-client
+```
+
+
