@@ -1,3 +1,5 @@
+# Basics
+
 ## Setup using Vagrant
 
 ```ruby
