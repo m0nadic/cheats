@@ -18,7 +18,7 @@ edit file `~/cookbooks/apache/recipes/server.rb`
 
 add the following content
 
-```chef
+```ruby
 package 'httpd'
 
 file '/var/www/html/index.html' do content '<h1>Hello, world!</h1>'
