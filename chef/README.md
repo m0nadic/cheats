@@ -1,6 +1,7 @@
 # Chef
 
 ## Setup using Vagrant
+
 ```ruby
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -22,12 +23,15 @@ Vagrant.configure("2") do |config|
 
 end
 ```
+
 now execute the following
 
 ```bash
 $ vagrant up
 $ vagrant reload
 ```
+
+---
 
 ## Generate cookbook
 
