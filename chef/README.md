@@ -50,3 +50,24 @@ include_recipe 'apache::server'
 $ sudo chef-client -z -r "recipe[apache]"
 ```
 
+## Generate template
+
+```bash
+$ chef generate template cookbooks/apache index.html
+```
+
+## Use a template resource
+
+edit `~/cookbooks/apache/recipes/server.rb` and change the content to
+
+```ruby
+package 'httpd'
+
+template '/var/www/html/index.html' do
+  source 'index.html.erb'
+end
+
+service 'httpd' do
+  action [ :enable, :start ]
+end
+```
