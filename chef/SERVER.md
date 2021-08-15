@@ -78,3 +78,17 @@ end
 
 ---
 
+## Bootstraping
+Bootstrapping `web1`: From within the folder which has the `Vagrantfile` execute
+
+```bash
+$ vagrant ssh-config
+```
+
+Now from withing the chef repo directory in the vagrant host machine
+
+```bash
+$ knife bootstrap localhost --ssh-port <Port-from-ssh-config-cmd-output> --ssh-user <User-from-ssh-config-cmd-output> --sudo --ssh-identity-file <IdentityFile-from-ssh-config-cmd-output> -N web1
+```
+
+
