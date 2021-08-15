@@ -36,4 +36,17 @@ end
 $ sudo chef-client -z cookbooks/apache/recipes/server.rb
 ```
 
+## Include recipe in the default recipe
+
+edit `~/cookbooks/apache/recipes/default.rb` and add the following content.
+
+```ruby
+include_recipe 'apache::server'
+```
+
+## Apply the default recipe
+
+```bash
+$ sudo chef-client -z -r "recipe[apache]"
+```
 
