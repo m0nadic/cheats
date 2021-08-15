@@ -1,5 +1,34 @@
 # Chef
 
+## Setup using Vagrant
+```ruby
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/centos-7.2"
+
+
+  config.vm.synced_folder "cookbooks/", "/home/vagrant/cookbooks", create: true
+
+  config.vm.provision "file", source: "vimrc", destination: "$HOME/.vimrc"
+
+
+  config.vm.provision "shell", inline: <<-SHELL
+    curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.18.30
+    yum install nano -y
+    yum install vim -y
+  SHELL
+
+end
+```
+now execute the following
+
+```bash
+$ vagrant up
+$ vagrant reload
+```
+
 ## Generate cookbook
 
 ```bash
