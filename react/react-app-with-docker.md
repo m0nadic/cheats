@@ -62,7 +62,7 @@ cd myapp
 now start a node container with the app directory mounted as a volume
 
 ```
-docker run -it -p 3000:3000 --rm --name app --volume `pwd`:/app node /bin/bash
+docker run -it -p 3000:3000 --rm --name app --volume `pwd`:/app react:18 /bin/bash
 ```
 
 now in the container shell do the following
