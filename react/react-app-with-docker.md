@@ -16,7 +16,7 @@ docker run -it -p 3000:3000 --rm --name app --volume `pwd`:/app node /bin/bash
 now in the container shell do the following
 
 ```
-cd /app/
-npx create-react-app .
+cd /
+npx create-react-app /app
 npm start
 ```
